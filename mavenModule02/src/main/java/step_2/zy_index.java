@@ -1,3 +1,8 @@
+package step_2;
+
+import step_1.ConnectSql_s1;
+import util.DbUtil;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

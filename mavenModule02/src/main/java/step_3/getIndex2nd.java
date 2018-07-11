@@ -1,3 +1,8 @@
+package step_3;
+
+import util.ConfigManager;
+import util.DbUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

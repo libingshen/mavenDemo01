@@ -1,3 +1,5 @@
+package step_3;
+
 public class GuangWangPP {
 	public static void main(String[] args) {
 		OneToOne one = new OneToOne();

@@ -1,3 +1,8 @@
+package step_1;
+
+import util.ConfigManager;
+import util.DbUtil;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
