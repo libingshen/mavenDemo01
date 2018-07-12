@@ -3,3 +3,11 @@
 ---创建一个SAXReader
 ---从文件或数据流创建一个文档
 ---通过调用document.selectNodes()获取使用XPath表达式所需的节点
+
+2、参考：
+https://www.jianshu.com/p/e8561ea99d03
+https://www.yiibai.com/java_xml/java_dom4j_parse_document.html
+https://www.ibm.com/developerworks/cn/xml/x-dom4j.html
+https://www.jianshu.com/p/aa3b3b4dde04
+http://springsfeng.iteye.com/blog/1522869
+https://www.cnblogs.com/nerxious/archive/2013/05/04/3060263.html
