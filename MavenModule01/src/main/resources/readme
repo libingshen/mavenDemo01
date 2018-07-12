@@ -1,0 +1,5 @@
+1、Dom4j解析
+---导包：dom4j、jaxen、jaxme
+---创建一个SAXReader
+---从文件或数据流创建一个文档
+---通过调用document.selectNodes()获取使用XPath表达式所需的节点
