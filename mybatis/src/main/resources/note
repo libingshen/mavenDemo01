@@ -1,0 +1,26 @@
+1、映入dtd约束文件
+打开file——Settings..(快捷键ctrl+alt+s);
+
+找到Languages&Frameworks——Schemas and DTDs
+
+右侧的External Schemas and DTDs窗口中点击添加按钮。
+
+然后url上把链接粘贴上
+
+2、全局配置文件
+configuration 配置
+properties 属性
+settings 设置
+typeAliases 类型别名
+typeHandlers 类型处理器
+objectFactory 对象工厂
+plugins 插件
+environments 环境
+environment 环境变量
+transactionManager 事务管理器
+dataSource 数据源
+databaseIdProvider 数据库厂商标识
+mappers 映射器
+
+参考：
+http://www.mybatis.org/mybatis-3/zh/configuration.html#
