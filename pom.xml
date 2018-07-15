@@ -12,6 +12,7 @@
         <module>mavenModule03</module>
         <module>mavenModule02</module>
         <module>MavenModule01</module>
+        <module>mybatis</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->

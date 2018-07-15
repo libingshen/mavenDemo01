@@ -10,6 +10,7 @@
         <module name="MavenModule01" />
         <module name="mavenModule02" />
         <module name="mavenModule03" />
+        <module name="mybatis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +18,7 @@
       <module name="MavenModule01" target="1.7" />
       <module name="mavenModule02" target="1.7" />
       <module name="mavenModule03" target="1.7" />
+      <module name="mybatis" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
