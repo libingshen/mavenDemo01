@@ -120,5 +120,10 @@
 						不重要，简单的Dao接口为了开发快速可以使用注解；
 		-->
         <mapper resource="EmployeeMapper.xml"/>
+        <!--<mapper resource="com/atguigu/mybatis/dao/EmployeeMapper.xml"/>-->
+
+        <!--<mapper class="com.atguigu.mybatis.dao.EmployeeMapper"></mapper>-->
+
+        <!--<package name="com.atguigu.mybatis.dao"></package>-->
     </mappers>
 </configuration>

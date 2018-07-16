@@ -24,3 +24,8 @@ mappers 映射器
 
 参考：
 http://www.mybatis.org/mybatis-3/zh/configuration.html#
+
+
+Q:
+批量注册
+引用接口
