@@ -29,3 +29,9 @@ http://www.mybatis.org/mybatis-3/zh/configuration.html#
 Q:
 批量注册
 引用接口
+
+=====================================
+
+3、oracle获取非自增主键的值：
+SQL> SELECT * from User_Sequences;
+SQL> select SEQ_ZL_MSS.nextval from dual;

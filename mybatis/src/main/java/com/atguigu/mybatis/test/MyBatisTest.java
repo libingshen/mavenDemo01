@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 
 /**
@@ -26,7 +27,6 @@ import java.io.InputStream;
  * mybatis的全局配置文件：包含数据库连接池信息，事务管理器信息等...系统运行环境信息
  * sql映射文件：保存了每一个sql语句的映射信息：
  * 将sql抽取出来。
- *
  */
 public class MyBatisTest {
 
@@ -86,6 +86,94 @@ public class MyBatisTest {
             System.out.println(employee);
         } finally {
             session.close();
+        }
+    }
+
+
+    /**
+     * 测试增删改
+     * 1、mybatis允许增删改直接定义以下类型返回值
+     * Integer、Long、Boolean、void
+     * 2、我们需要手动提交数据
+     * sqlSessionFactory.openSession();===》手动提交
+     * sqlSessionFactory.openSession(true);===》自动提交
+     *
+     * @throws IOException
+     */
+    @Test
+    public void test03() throws IOException {
+        //获得sqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        //1、获取到sqlSession不会自动提交
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+
+            //测试添加
+            Employee employee = new Employee(null, "jerry", "jerry@atguigu.com", "1");
+            mapper.addEmp(employee);
+            System.out.println(employee.getId());
+
+            //测试修改
+            //Employee employee = new Employee(1, "jerry", "jerry@atguigu.com", "0");
+            //mapper.updateEmp(employee);
+
+            //测试删除
+            //mapper.deleteEmpById(2);
+
+            //2、手动提交
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+
+    //根据多个查询条件参数查询员工信息
+    @Test
+    public void test05() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            //查询
+            Employee tom = mapper.getEmpByIdAndLastName(1, "jerry");
+            System.out.println(tom);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+
+    }
+
+    //根据多个查询条件参数查询员工信息，封装成map
+    @Test
+    public void test06() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            //查询
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("id","1");
+            map.put("lastName","jerry");
+            Employee employee = mapper.getEmpByMap(map);
+            System.out.println(employee);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
         }
     }
 
