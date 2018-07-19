@@ -111,4 +111,10 @@ resultType：返回值类型
         select id,last_name lastName,email,gender from tbl_employee where id = #{id} AND last_name=#{lastName}
     </select>
 
+    <!--根据员工姓名查询，结果封装到list集合-->
+    <!--public List<Employee> getEmpByLastName(String lastName);-->
+    <select id="getEmpByLastName" resultType="com.atguigu.mybatis.bean.Employee">
+        select * from tbl_employee where last_name like #{lastName}
+    </select>
+
 </mapper>

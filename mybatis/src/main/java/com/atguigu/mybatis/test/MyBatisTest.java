@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -166,10 +167,32 @@ public class MyBatisTest {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             //查询
             HashMap<String, Object> map = new HashMap<>();
-            map.put("id","1");
-            map.put("lastName","jerry");
+            map.put("id", "1");
+            map.put("lastName", "jerry");
             Employee employee = mapper.getEmpByMap(map);
             System.out.println(employee);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    //根据员工姓名查询，结果封装到list集合
+    @Test
+    public void test07() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            //查询
+            List<Employee> employees = mapper.getEmpByLastName("%e%");
+            for(Employee employee : employees){
+                System.out.println(employee);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
