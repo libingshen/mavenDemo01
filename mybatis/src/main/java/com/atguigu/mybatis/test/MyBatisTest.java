@@ -2,6 +2,7 @@ package com.atguigu.mybatis.test;
 
 import com.atguigu.mybatis.bean.Employee;
 import com.atguigu.mybatis.dao.EmployeeMapper;
+import com.atguigu.mybatis.dao.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -190,9 +192,70 @@ public class MyBatisTest {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             //查询
             List<Employee> employees = mapper.getEmpByLastName("%e%");
-            for(Employee employee : employees){
+            for (Employee employee : employees) {
                 System.out.println(employee);
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+
+    //根据员工姓名查询，结果封装到map集合，key:列名，value：值
+    @Test
+    public void test08() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            //查询
+            Map<String, Object> map = mapper.getEmpByIdReturnMap(1);
+            System.out.println(map);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    //根据员工姓名模糊查询，封装多条记录到Map集合
+    @Test
+    public void test09() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            //查询
+            Map<Integer, Employee> map = mapper.getEmpByLastNameReturnMap("%e%");
+            System.out.println(map);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    //根据员工id查询，增强类
+    @Test
+    public void test10() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            //查询
+            Employee employee = mapper.getEmpById(1);
+            System.out.println(employee);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

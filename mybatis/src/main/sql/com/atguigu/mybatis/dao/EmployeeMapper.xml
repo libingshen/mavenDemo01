@@ -117,4 +117,16 @@ resultType：返回值类型
         select * from tbl_employee where last_name like #{lastName}
     </select>
 
+    <!--根据员工id查询，结果集封装到map,key就是列名，值就是对应的值-->
+    <!--public Map<String,Object> getEmpByIdReturnMap(Integer id);-->
+    <select id="getEmpByIdReturnMap" resultType="map">
+        select * from tbl_employee where id=#{id}
+    </select>
+
+    <!--多条记录封装一个map：Map<Integer,Employee>:键是这条记录的主键，值是记录封装后的javaBean-->
+    <!--public Map<Integer,Employee> getEmpByLastNameReturnMap(String lastName);-->
+    <select id="getEmpByLastNameReturnMap" resultType="com.atguigu.mybatis.bean.Employee">
+        select * from tbl_employee where last_name like #{lastName}
+    </select>
+
 </mapper>
