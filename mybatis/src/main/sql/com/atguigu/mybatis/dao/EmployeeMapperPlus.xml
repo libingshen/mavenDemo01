@@ -28,9 +28,86 @@
        SELECT * from tbl_employee where id=#{id}
     </select>-->
 
+    <!--引用结果集映射-->
     <select id="getEmpById" resultMap="MyEmp">
         SELECT * from tbl_employee where id=#{id}
     </select>
+
+    <!--
+        场景一：
+            查询Employee的同时查询员工对应的部门
+            Employee===>Department
+            一个员工有与之对应的部门信息
+    -->
+    <!--
+        联合查询级联属性封装结果集
+    -->
+    <resultMap id="MyDifEmp" type="com.atguigu.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"></result>
+        <result column="email" property="email"></result>
+        <result column="gender" property="gender"></result>
+        <result column="did" property="dept.id"></result>
+        <result column="dept_name" property="dept.deptmentName"></result>
+    </resultMap>
+    <!--使用association定义关联的单个对象的封装规则-->
+    <resultMap id="MyDifEmp2" type="com.atguigu.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"></result>
+        <result column="email" property="email"></result>
+        <result column="gender" property="gender"></result>
+        <!--
+            association可以指定联合的Javabean对象
+            property="dept"：指定哪个属性是联合的对象
+            javaType：指定这个属性对象的类型
+        -->
+        <association property="dept" javaType="com.atguigu.mybatis.bean.Department">
+            <id column="did" property="id"></id>
+            <result column="dept_name" property="deptmentName"></result>
+        </association>
+    </resultMap>
+    <!--public Employee getEmpAndDept(Integer id);-->
+    <select id="getEmpAndDept" resultMap="MyDifEmp2">
+      SELECT t.id id,t.`last_name` last_name,t.`email` email,t.`gender` gender,t.`d_id` d_id,b.id did,b.dept_name dept_name
+ FROM tbl_employee t,tbl_dept b WHERE t.`d_id`=b.id AND t.`id`=#{id};
+    </select>
+
+
+    <!--
+        使用association进行分步查询
+        1、先按照员工id查询员工信息
+        2、根据查询员工信息中的d_id值去部门表查出部门信息
+        3、部门设置到员工中
+
+    -->
+    <resultMap id="MyEmpByStep" type="com.atguigu.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"></result>
+        <result column="email" property="email"></result>
+        <result column="gender" property="gender"></result>
+        <!-- association定义关联对象的封装规则
+	 		select:表明当前属性是调用select指定的方法查出的结果
+	 		column:指定将哪一列的值传给这个方法
+
+	 		流程：使用select指定的方法（传入column指定的这列参数的值）查出对象，并封装给property指定的属性
+	 	 -->
+        <association property="dept"
+                     select="com.atguigu.mybatis.dao.DepartmentMapper.getDeptById"
+                     column="d_id">
+        </association>
+    </resultMap>
+    <!--public Employee getEmpByIdStep(Integer id);-->
+    <select id="getEmpByIdStep" resultMap="MyEmpByStep">
+          select * from tbl_employee where id=#{id}
+    </select>
+
+    <!-- 可以使用延迟加载（懒加载）；(按需加载)
+	 	Employee==>Dept：
+	 		我们每次查询Employee对象的时候，都将一起查询出来。
+	 		部门信息在我们使用的时候再去查询；
+	 		分段查询的基础之上加上两个配置：
+	 -->
+
 </mapper>
 
 

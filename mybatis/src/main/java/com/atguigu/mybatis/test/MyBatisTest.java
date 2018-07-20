@@ -263,5 +263,47 @@ public class MyBatisTest {
         }
     }
 
+    //根据员工id查询，同时带出部门信息
+    @Test
+    public void test11() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            //查询
+            Employee employee = mapper.getEmpAndDept(1);
+            System.out.println(employee);
+            System.out.println(employee.getDept());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
 
+
+    //根据员工id查询，同时带出部门信息,使用分步查询
+    @Test
+    public void test12() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            //查询
+            Employee employee = mapper.getEmpByIdStep(1);
+//            System.out.println(employee);
+//            System.out.println(employee.getDept());
+            System.out.println(employee.getLastName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
 }
