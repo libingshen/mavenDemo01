@@ -1,6 +1,8 @@
 package com.atguigu.mybatis.test;
 
+import com.atguigu.mybatis.bean.Department;
 import com.atguigu.mybatis.bean.Employee;
+import com.atguigu.mybatis.dao.DepartmentMapper;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import com.atguigu.mybatis.dao.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
@@ -306,4 +308,47 @@ public class MyBatisTest {
             sqlSession.close();
         }
     }
+
+    //根据部门id查询部门信息，同时查询出该部门的员工信息
+    @Test
+    public void test13() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+            //查询
+            Department department = mapper.getDeptByIdPlus(1);
+            System.out.println(department);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    //根据部门id查询部门信息，同时查询出该部门的员工信息,使用分步查询
+    @Test
+    public void test14() throws IOException {
+        //获得sqlSessionfactory工厂
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //获得sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //获取接口的实现类对象,会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
+            DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+            //查询
+            Department department = mapper.getDeptByIdStep(1);
+            System.out.println(department.getDeptmentName());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
+
 }
