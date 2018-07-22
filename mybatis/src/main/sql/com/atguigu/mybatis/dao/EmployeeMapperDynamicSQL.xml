@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.dao.EmployeeMapperDynamicSQL">
+
+    <!--
+        参考：
+        http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html
+
+        if
+        choose (when, otherwise)
+        trim (where, set)
+        foreach
+    -->
+    <!---->
+    <resultMap id="MyEmp" type="com.atguigu.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+    </resultMap>
+    <!--查询员工，要求，携带了哪个字段查询条件就带上这个字段的值
+    public List<Employee> getEmpsByConditionIf(Employee employee);-->
+    <select id="getEmpsByConditionIf" resultMap="MyEmp">
+        select * from tbl_employee
+        <!--where 1=1-->
+        <!--
+            test:判断表达式（OGNL）
+            OGNL参考PPT或者官方文档
+            http://commons.apache.org/proper/commons-ognl/language-guide.html
+
+                c:if    test
+            从参数中取值进行判断
+
+            遇见特殊符号应该去写转义字符
+        -->
+
+        <!--
+            //查询的时候如果某些条件没带可能拼装SQL会有问题
+            解决：
+                1、给where后面加上1=1，以后的条件都and xxx
+                2、mybatis使用where标签来将所有的查询条件包括在内。mybatis就会将where标签中拼装的SQL，多出来的and或者or去掉。
+
+            新的问题：
+                where标签只会去掉第一个多出来的and或者or，如果and写在后面会有问题
+             解决：使用trim
+
+        -->
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="lastName!=null and lastName!=&quot;&quot;">
+                and last_name like #{lastName}
+            </if>
+            <if test="email!=null and email.trim()!=&quot;&quot;">
+                AND email=#{email}
+            </if>
+            <!--ognl会进行字符串与数字的转换判断"0"==0-->
+            <if test="gender==0 or gender==1">
+                and gender=#{gender}
+            </if>
+        </where>
+    </select>
+
+    <!--//动态查询条件，测试trim
+    public List<Employee> getEmpsByConditionTrim(Employee employee);-->
+    <select id="getEmpsByConditionTrim" resultMap="MyEmp">
+        select * from tbl_employee
+        <!--
+            后面多出来的and或者or，where标签不能解决，须使用trim进行截取
+            prefix="":前缀：trim标签体中是整个字符串拼串 后的结果。
+	 			prefix给拼串后的整个字符串加一个前缀
+            prefixOverrides="":
+                    前缀覆盖： 去掉整个字符串前面多余的字符
+            suffix="":后缀
+                    suffix给拼串后的整个字符串加一个后缀
+            suffixOverrides=""
+                    后缀覆盖：去掉整个字符串后面多余的字符
+
+        -->
+        <!--自定义截取规则-->
+        <trim prefix="where"  suffixOverrides="and">
+            <if test="id!=null">
+                id=#{id} and
+            </if>
+            <if test="lastName!=null and lastName!=&quot;&quot;">
+                last_name like #{lastName} and
+            </if>
+            <if test="email!=null and email.trim()!=&quot;&quot;">
+                email=#{email} and
+            </if>
+            <!--ognl会进行字符串与数字的转换判断"0"==0-->
+            <if test="gender==0 or gender==1">
+                gender=#{gender}
+            </if>
+        </trim>
+    </select>
+</mapper>
