@@ -11,7 +11,6 @@
         <module name="mavenModule02" />
         <module name="mavenModule03" />
         <module name="mybatis" />
-        <module name="mybatis_ssm" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
