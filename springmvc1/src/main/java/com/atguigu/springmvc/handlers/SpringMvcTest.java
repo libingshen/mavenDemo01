@@ -1,9 +1,13 @@
 package com.atguigu.springmvc.handlers;
 
+import com.atguigu.springmvc.entities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * 测试RequestMapping注解标在类上
@@ -13,6 +17,84 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SpringMvcTest {
     public static final String SUCCESS = "success";
+
+    /**
+     * 可以使用 Serlvet 原生的 API 作为目标方法的参数 具体支持以下类型
+     * HttpServletRequest
+     * HttpServletResponse
+     * HttpSession
+     * java.security.Principal
+     * Locale InputStream
+     * OutputStream
+     * Reader
+     * Writer
+     * @param request
+     * @param response
+     * @param out
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/testServletAPI")
+    public void testServletAPI(HttpServletRequest request,
+                               HttpServletResponse response, Writer out) throws IOException {
+        System.out.println("testServletAPI: ");
+        System.out.println("request===========>"+request);
+        System.out.println("response===========>"+response);
+        out.write("hello springmvc");
+//        return SUCCESS;
+    }
+
+
+    /**
+     * Spring MVC 会按请求参数名和 POJO 属性名进行自动匹配， 自动为该对象填充属性值。支持级联属性。
+     *  如：dept.deptId、dept.address.tel 等
+     * @param user
+     * @return
+     */
+    @RequestMapping("/testPojo")
+    public String testPojo(User user) {
+        System.out.println("testPojo: " + user);
+        return SUCCESS;
+    }
+
+    /**
+     * @CookieValue: 映射一个 Cookie 值. 属性同 @RequestParam
+     * @param sessionId
+     * @return
+     */
+    @RequestMapping("/testCookieValue")
+    public String testCookieValue(@CookieValue("JSESSIONID") String sessionId) {
+        System.out.println("testCookieValue: sessionId: " + sessionId);
+        return SUCCESS;
+    }
+
+    /**
+     * 了解: 映射请求头信息 用法同 @RequestParam
+     *
+     * @param al
+     * @return
+     */
+    @RequestMapping("/testRequestHeader")
+    public String testRequestHeader(
+            @RequestHeader(value = "Accept-Language") String al) {
+        System.out.println("testRequestHeader, Accept-Language============> " + al);
+        return SUCCESS;
+    }
+
+    /**
+     * @param username
+     * @param age
+     * @return
+     * @RequestParam 来映射请求参数. value 值即请求参数的参数名 required 该参数是否必须. 默认为 true
+     * defaultValue 请求参数的默认值
+     */
+    @RequestMapping("/testRequestParam")
+    public String testRequestParam(@RequestParam(value = "username") String username, @RequestParam(value = "age", required = false, defaultValue = "0") int age) {
+        System.out.println("testRequestParam:");
+        System.out.println("username==========>" + username);
+        System.out.println("age==============>" + age);
+        return SUCCESS;
+    }
 
     /**
      * Rest 风格的 URL. 以 CRUD 为例: 新增: /order POST 修改: /order/1 PUT update?id=1 获取:

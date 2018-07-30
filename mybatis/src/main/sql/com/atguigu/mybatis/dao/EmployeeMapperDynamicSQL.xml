@@ -197,12 +197,12 @@
     </insert>
     <!-- 这种方式需要数据库连接属性allowMultiQueries=true；
 	 	这种分号分隔多个sql可以用于其他的批量操作（删除，修改） -->
-    <insert id="addEmps">
+   <!-- <insert id="addEmps">
         <foreach collection="emps" item="emp" separator=";">
             insert into tbl_employee(last_name,email,gender,d_id)
             values(#{emp.lastName},#{emp.email},#{emp.gender},#{emp.dept.id})
         </foreach>
-    </insert>
+    </insert>-->
 
 
     <!-- Oracle数据库批量保存：

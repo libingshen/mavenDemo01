@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/mavenModule03/mavenModule03.iml" filepath="$PROJECT_DIR$/mavenModule03/mavenModule03.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" filepath="$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springmvc1/springmvc1.iml" filepath="$PROJECT_DIR$/springmvc1/springmvc1.iml" />
     </modules>
   </component>
 </project>

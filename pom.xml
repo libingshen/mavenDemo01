@@ -13,13 +13,14 @@
         <module>MavenModule01</module>
         <module>mybatis</module>
         <module>mybatis_ssm</module>
+        <module>springmvc1</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 </project>
