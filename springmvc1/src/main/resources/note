@@ -1,0 +1,6 @@
+1、helloWorld
+---添加依赖
+---在web.xml中配置DispatcherServlet
+---加入springmvc配置文件
+---编写请求的处理器
+---编写视图
