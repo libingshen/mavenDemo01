@@ -3,20 +3,71 @@ package com.atguigu.springmvc.handlers;
 import com.atguigu.springmvc.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * 测试RequestMapping注解标在类上
  */
 
+
+@SessionAttributes(value={"user"}, types={String.class})
 @RequestMapping("/springmvc")
 @Controller
 public class SpringMvcTest {
     public static final String SUCCESS = "success";
+
+    /**
+     * @SessionAttributes 除了可以通过属性名指定需要放到会话中的属性外(实际上使用的是 value 属性值),
+     * 还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中(实际上使用的是 types 属性值)
+     *
+     * 注意: 该注解只能放在类的上面. 而不能修饰放方法.
+     * @param map
+     * @return
+     */
+    @RequestMapping("/testSessionAttributes")
+    public String testSessionAttributes(Map<String, Object> map){
+        User user = new User("Tom", "123456", "tom@atguigu.com", 15);
+        map.put("user", user);
+        map.put("school", "atguigu");
+        System.out.println("map==============>"+map);
+        return SUCCESS;
+    }
+
+    /**
+     * 目标方法可以添加 Map 类型(实际上也可以是 Model 类型或 ModelMap 类型)的参数.
+     * @param map
+     * @return
+     */
+    @RequestMapping("/testMap")
+    public String testMap(Map<String, Object> map){
+        System.out.println(map.getClass().getName());
+        map.put("names", Arrays.asList("Tom", "Jerry", "Mike"));
+        return SUCCESS;
+    }
+
+    /**
+     * 目标方法的返回值可以是 ModelAndView 类型。
+     * 其中可以包含视图和模型信息
+     * SpringMVC 会把 ModelAndView 的 model 中数据放入到 request 域对象中.
+     * @return
+     */
+    @RequestMapping("/testModelAndView")
+    public ModelAndView testModelAndView() {
+        String viewName = SUCCESS;
+        ModelAndView modelAndView = new ModelAndView(viewName);
+        //添加模型数据到 ModelAndView 中.
+        modelAndView.addObject("time", new Date());
+        System.out.println("modelAndView=============>"+modelAndView);
+        return modelAndView;
+    }
 
     /**
      * 可以使用 Serlvet 原生的 API 作为目标方法的参数 具体支持以下类型
@@ -28,6 +79,7 @@ public class SpringMvcTest {
      * OutputStream
      * Reader
      * Writer
+     *
      * @param request
      * @param response
      * @param out
@@ -38,8 +90,8 @@ public class SpringMvcTest {
     public void testServletAPI(HttpServletRequest request,
                                HttpServletResponse response, Writer out) throws IOException {
         System.out.println("testServletAPI: ");
-        System.out.println("request===========>"+request);
-        System.out.println("response===========>"+response);
+        System.out.println("request===========>" + request);
+        System.out.println("response===========>" + response);
         out.write("hello springmvc");
 //        return SUCCESS;
     }
@@ -47,7 +99,8 @@ public class SpringMvcTest {
 
     /**
      * Spring MVC 会按请求参数名和 POJO 属性名进行自动匹配， 自动为该对象填充属性值。支持级联属性。
-     *  如：dept.deptId、dept.address.tel 等
+     * 如：dept.deptId、dept.address.tel 等
+     *
      * @param user
      * @return
      */
@@ -58,9 +111,9 @@ public class SpringMvcTest {
     }
 
     /**
-     * @CookieValue: 映射一个 Cookie 值. 属性同 @RequestParam
      * @param sessionId
      * @return
+     * @CookieValue: 映射一个 Cookie 值. 属性同 @RequestParam
      */
     @RequestMapping("/testCookieValue")
     public String testCookieValue(@CookieValue("JSESSIONID") String sessionId) {

@@ -13,6 +13,17 @@
 <body>
 <h1>index...</h1>
 
+<%--将后台数据封装到session域中--%>
+<a href="springmvc/testSessionAttributes">Test SessionAttributes</a>
+<br><br>
+
+<a href="springmvc/testMap">Test Map</a>
+<br><br>
+
+<%--测试模型视图--%>
+<a href="springmvc/testModelAndView">Test ModelAndView</a>
+<br><br>
+
 <a href="springmvc/testServletAPI">Test ServletAPI</a>
 <br><br>
 
