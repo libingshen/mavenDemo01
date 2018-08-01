@@ -18,36 +18,77 @@ import java.util.Map;
  */
 
 
-@SessionAttributes(value={"user"}, types={String.class})
+@SessionAttributes(value = {"user"}, types = {String.class})
 @RequestMapping("/springmvc")
 @Controller
 public class SpringMvcTest {
     public static final String SUCCESS = "success";
 
     /**
-     * @SessionAttributes 除了可以通过属性名指定需要放到会话中的属性外(实际上使用的是 value 属性值),
-     * 还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中(实际上使用的是 types 属性值)
+     * 1. 有 @ModelAttribute 标记的方法, 会在每个目标方法执行之前被 SpringMVC 调用!
+     * 2. @ModelAttribute 注解也可以来修饰目标方法 POJO 类型的入参, 其 value 属性值有如下的作用:
+     * 1). SpringMVC 会使用 value 属性值在 implicitModel 中查找对应的对象, 若存在则会直接传入到目标方法的入参中.
+     * 2). SpringMVC 会一 value 为 key, POJO 类型的对象为 value, 存入到 request 中.
      *
-     * 注意: 该注解只能放在类的上面. 而不能修饰放方法.
+     * @param id
      * @param map
+     */
+    @ModelAttribute
+    public void getUser(@RequestParam(value = "id", required = false) Integer id,
+                        Map<String, Object> map) {
+        System.out.println("modelAttribute method==============>");
+        if (id != null) {
+            //模拟从数据库中获取对象
+            User user = new User(1, "Tom", "123456", "tom@atguigu.com", 12);
+            System.out.println("从数据库中获取一个对象: " + user);
+
+//            map.put("abc", user); 键名必须和目标方法入参类型的第一个字母小写的字符串一致
+            map.put("user", user);
+        }
+    }
+
+    /**
+     * 运行流程:
+     * 1. 执行 @ModelAttribute 注解修饰的方法: 从数据库中取出对象, 把对象放入到了 Map 中. 键为: user
+     * 2. SpringMVC 从 Map 中取出 User 对象, 并把表单的请求参数赋给该 User 对象的对应属性.
+     * 3. SpringMVC 把上述对象传入目标方法的参数.
+     * <p>
+     * 注意: 在 @ModelAttribute 修饰的方法中, 放入到 Map 时的键需要和目标方法入参类型的第一个字母小写的字符串一致!
+     *
+     * @param user
      * @return
      */
+    @RequestMapping("/testModelAttribute")
+    public String testModelAttribute(User user) {
+        System.out.println("修改: " + user);
+        return SUCCESS;
+    }
+
+    /**
+     * @param map
+     * @return
+     * @SessionAttributes 除了可以通过属性名指定需要放到会话中的属性外(实际上使用的是 value 属性值),
+     * 还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中(实际上使用的是 types 属性值)
+     * <p>
+     * 注意: 该注解只能放在类的上面. 而不能修饰放方法.
+     */
     @RequestMapping("/testSessionAttributes")
-    public String testSessionAttributes(Map<String, Object> map){
+    public String testSessionAttributes(Map<String, Object> map) {
         User user = new User("Tom", "123456", "tom@atguigu.com", 15);
         map.put("user", user);
         map.put("school", "atguigu");
-        System.out.println("map==============>"+map);
+        System.out.println("map==============>" + map);
         return SUCCESS;
     }
 
     /**
      * 目标方法可以添加 Map 类型(实际上也可以是 Model 类型或 ModelMap 类型)的参数.
+     *
      * @param map
      * @return
      */
     @RequestMapping("/testMap")
-    public String testMap(Map<String, Object> map){
+    public String testMap(Map<String, Object> map) {
         System.out.println(map.getClass().getName());
         map.put("names", Arrays.asList("Tom", "Jerry", "Mike"));
         return SUCCESS;
@@ -57,6 +98,7 @@ public class SpringMvcTest {
      * 目标方法的返回值可以是 ModelAndView 类型。
      * 其中可以包含视图和模型信息
      * SpringMVC 会把 ModelAndView 的 model 中数据放入到 request 域对象中.
+     *
      * @return
      */
     @RequestMapping("/testModelAndView")
@@ -65,7 +107,7 @@ public class SpringMvcTest {
         ModelAndView modelAndView = new ModelAndView(viewName);
         //添加模型数据到 ModelAndView 中.
         modelAndView.addObject("time", new Date());
-        System.out.println("modelAndView=============>"+modelAndView);
+        System.out.println("modelAndView=============>" + modelAndView);
         return modelAndView;
     }
 

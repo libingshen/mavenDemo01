@@ -56,6 +56,18 @@
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--引入Tomcat依赖-->
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>7.0.82</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
+
+
 
 </project>

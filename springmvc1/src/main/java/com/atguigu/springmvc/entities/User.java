@@ -60,18 +60,18 @@ public class User {
 		this.address = address;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password
-				+ ", email=" + email + ", age=" + age + ", address=" + address
-				+ "]";
-	}
-	
 //	@Override
 //	public String toString() {
-//		return "User [id=" + id + ", username=" + username + ", password="
-//				+ password + ", email=" + email + ", age=" + age + "]";
+//		return "User [username=" + username + ", password=" + password
+//				+ ", email=" + email + ", age=" + age + ", address=" + address
+//				+ "]";
 //	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", age=" + age + "]";
+	}
 	
 	public User(String username, String password, String email, int age) {
 		super();
