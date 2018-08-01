@@ -18,11 +18,18 @@ import java.util.Map;
  */
 
 
-@SessionAttributes(value = {"user"}, types = {String.class})
+//@SessionAttributes(value = {"user"}, types = {String.class})
 @RequestMapping("/springmvc")
 @Controller
 public class SpringMvcTest {
     public static final String SUCCESS = "success";
+
+
+    @RequestMapping("/testViewAndViewResolver")
+    public String testViewAndViewResolver(){
+        System.out.println("testViewAndViewResolver");
+        return SUCCESS;
+    }
 
     /**
      *
@@ -43,8 +50,8 @@ public class SpringMvcTest {
             User user = new User(1, "Tom", "123456", "tom@atguigu.com", 12);
             System.out.println("从数据库中获取一个对象: " + user);
 
-//            map.put("abc", user); 键名必须和目标方法入参类型的第一个字母小写的字符串一致
-            map.put("abc", user);
+//            map.put("abc", user); 键名必须和目标方法入参类型的第一个字母小写的字符串一致,不然使用@ModelAttribute 注解也可以来修饰目标方法 POJO 类型的入参
+            map.put("user", user);
         }
     }
 
@@ -93,7 +100,7 @@ public class SpringMvcTest {
      * @return
      */
     @RequestMapping("/testModelAttribute")
-    public String testModelAttribute(@ModelAttribute("abc") User user) {
+    public String testModelAttribute(/*@ModelAttribute("abc")*/ User user) {
         System.out.println("修改: " + user);
         return SUCCESS;
     }
