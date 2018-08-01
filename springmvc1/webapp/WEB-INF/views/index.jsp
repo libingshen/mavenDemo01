@@ -27,7 +27,7 @@
     <br>
     email: <input type="text" name="email" value="tom@atguigu.com"/>
     <br>
-    age: <input type="text" name="age" value="12"/>
+    age: <input type="text" name="age" value="15"/>
     <br>
     <input type="submit" value="Submit"/>
 </form>

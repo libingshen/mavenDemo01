@@ -35,5 +35,13 @@ request school: ${requestScope.school }
 session school: ${sessionScope.school }
 <br><br>
 
+
+abc user: ${requestScope.abc }
+<br><br>
+
+abc user: ${requestScope.abc }
+<br><br>
+
+
 </body>
 </html>
