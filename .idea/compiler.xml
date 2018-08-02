@@ -10,6 +10,7 @@
         <module name="MavenModule01" />
         <module name="mavenModule02" />
         <module name="mavenModule03" />
+        <module name="mavenModule04" />
         <module name="mybatis" />
         <module name="mybatis_ssm" />
         <module name="springmvc1" />
@@ -20,6 +21,7 @@
       <module name="MavenModule01" target="1.7" />
       <module name="mavenModule02" target="1.7" />
       <module name="mavenModule03" target="1.7" />
+      <module name="mavenModule04" target="1.7" />
       <module name="mybatis" target="1.7" />
       <module name="mybatis_ssm" target="1.7" />
       <module name="springmvc1" target="1.7" />

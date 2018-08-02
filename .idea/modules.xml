@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/mavenDemo01.iml" filepath="$PROJECT_DIR$/mavenDemo01.iml" />
       <module fileurl="file://$PROJECT_DIR$/mavenModule02/mavenModule02.iml" filepath="$PROJECT_DIR$/mavenModule02/mavenModule02.iml" />
       <module fileurl="file://$PROJECT_DIR$/mavenModule03/mavenModule03.iml" filepath="$PROJECT_DIR$/mavenModule03/mavenModule03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mavenModule04/mavenModule04.iml" filepath="$PROJECT_DIR$/mavenModule04/mavenModule04.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/mybatis/mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" filepath="$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" />
       <module fileurl="file://$PROJECT_DIR$/springmvc1/springmvc1.iml" filepath="$PROJECT_DIR$/springmvc1/springmvc1.iml" />
