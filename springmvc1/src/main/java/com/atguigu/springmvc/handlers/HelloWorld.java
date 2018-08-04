@@ -21,9 +21,9 @@ public class HelloWorld {
         return "success";
     }
 
-    @RequestMapping("/index")
+    /*@RequestMapping("/index")
     public String index() {
         System.out.println("index...");
         return "index";
-    }
+    }*/
 }

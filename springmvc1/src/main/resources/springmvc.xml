@@ -12,6 +12,12 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!-- 配置视图  BeanNameViewResolver 解析器: 使用视图的名字来解析视图 -->
+    <!-- 通过 order 属性来定义视图解析器的优先级, order 值越小优先级越高 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="100"></property>
+    </bean>
+
     <!-- 配置国际化资源文件 -->
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -21,6 +27,7 @@
     <!-- 配置直接转发的页面 -->
     <!-- 可以直接相应转发的页面, 而无需再经过 Handler 的方法.  -->
     <mvc:view-controller path="/success" view-name="success"/>
+    <mvc:view-controller path="/index" view-name="index"/>
 
 
     <!--两个标准配置  -->
