@@ -16,6 +16,7 @@
         <module>springmvc1</module>
         <module>mavenModule04</module>
         <module>springmvc2</module>
+        <module>zczyppYD_Thread</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->

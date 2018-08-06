@@ -15,6 +15,7 @@
         <module name="mybatis_ssm" />
         <module name="springmvc1" />
         <module name="springmvc2" />
+        <module name="zczyppYD_Thread" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +29,7 @@
       <module name="springmvc1" target="1.7" />
       <module name="springmvc2" target="1.7" />
       <module name="WebUploader" target="1.7" />
+      <module name="zczyppYD_Thread" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

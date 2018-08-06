@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" filepath="$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" />
       <module fileurl="file://$PROJECT_DIR$/springmvc1/springmvc1.iml" filepath="$PROJECT_DIR$/springmvc1/springmvc1.iml" />
       <module fileurl="file://$PROJECT_DIR$/springmvc2/springmvc2.iml" filepath="$PROJECT_DIR$/springmvc2/springmvc2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczyppYD_Thread/zczyppYD_Thread.iml" filepath="$PROJECT_DIR$/zczyppYD_Thread/zczyppYD_Thread.iml" />
     </modules>
   </component>
 </project>

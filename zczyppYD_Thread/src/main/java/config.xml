@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<srcdatabase>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@135.125.135.34:1621:odsmrac1</url>
+		<username>mss_ds</username>
+		<password><![CDATA[!odsm_dbu123]]></password>
+	</srcdatabase>
+	
+	<clearZcIndex>update zc_copy_test01 t set t.zc_index=null</clearZcIndex>
+	
+	<clearZyIndex>update zy_copy_test01 t set t.zy_index=null</clearZyIndex>
+	
+	<clearZcZyPP>update zy_copy_test01 t set t.zy_pp=null</clearZcZyPP>
+	
+	<clearZcId>update zc_copy_test01 t set t.zc_id=null</clearZcId>
+	<clearZyId>update zy_copy_test01 t set t.zy_id=null</clearZyId>
+	<clearZcZhanzhi_name>update zc_copy_test01 t set t.zhanzhi_name=null</clearZcZhanzhi_name>
+	<clearZyZhanzhi_name>update zy_copy_test01 t set t.zhanzhi_name=null</clearZyZhanzhi_name>
+	<clearZy_index_2nd>update zy_copy_test01 t set t.zy_index_2nd=null</clearZy_index_2nd>
+	<clearYD_Statistic>truncate table YD_STATISTIC</clearYD_Statistic>
+	
+	<!--获取资产索引sql的where条件-->
+	<getZcWhere>select t.zc_index,t.zc_guize,t.zc_zz_key from ZC_GUIZE t</getZcWhere>
+	<!--获取资源索引sql的where条件-->
+	<getZyWhere>select t.zy_index,t.zy_guize from ZY_GUIZE t</getZyWhere>
+	
+	<!--获取资产表 某站址的所有索引类型-->
+	<getIndex>
+		select 
+			t.zc_index  
+		from 
+			zc_copy_test01 t 
+		where 
+			 t.zc_id = '移动网'
+			 and t.zhanzhi_name = ?
+		group by t.zc_index
+	</getIndex>
+	
+	<!--获取资产表 某站址的一个资产索引-->
+	<getSqlZCOne>
+		select t.ANLN1
+  		from 
+  			zc_copy_test01 t
+ 		where 
+     		t.zc_index = ?
+     		and t.zhanzhi_name = ? 
+     		and t.zc_id = '移动网'
+     		order by t.aktiv desc
+	</getSqlZCOne>
+	
+	<!--获取资源表 某站址的一个资源索引-->
+	<getSqlZYOne>
+    	select t.id
+      		from zy_copy_test01 t
+   		 where 
+         	t.zy_index = ?
+         	and  t.zhanzhi_name =?
+         	and t.zy_id = '移动网'
+	</getSqlZYOne>
+	
+	<insertSqlPP>update zy_copy_test01 t set t.zy_pp = ? where t.id = ? and t.is_match=1</insertSqlPP>
+	
+	<getLocation>
+		select t.zhanzhi_name,t.zhanzhi_suoyin,t.city ,rownum rn from ZCZYPP_JZMC t
+	</getLocation>
+	
+	<getLocation_index>
+		select * from(
+			select t.zhanzhi_name,t.zhanzhi_suoyin,t.city ,rownum rn from ZCZYPP_JZMC t
+		) where rn &gt;= ? and rn &lt;= ? 
+	</getLocation_index>
+	
+	<zhanzhi_pp>
+		<!--
+			ltext:利润中心名称
+			anlhtxt:地址
+
+		-->
+		update zc_copy_test01 t set t.zhanzhi_name = ?,t.zc_id='移动网' 
+		where ( (t.ltext like ? and t.anlhtxt like ?) 
+		        or (t.ltext = '省公司本部' 
+		        	and t.anlhtxt like ? 
+		        	and t.anlhtxt like ? ))
+		 and  t.zz_key like '07%' 
+		 and  t.aktiv &lt; '20160101'
+	</zhanzhi_pp>
+	
+	<zhanzhi_pp_2>
+		update zc_copy_test01 t set t.zhanzhi_name = ? 
+		where (t.ltext like '%海口%' or  t.ltext like '%省公司本部%')
+		 and  t.anlhtxt like ?
+		 and  t.zz_key like '07%' 
+		 and  t.aktiv &lt; '20160101'
+	</zhanzhi_pp_2>
+	
+	<zhanzhi_pp_zy>
+		update zy_copy_test01 t set t.zhanzhi_name = ? ,t.zy_id='移动网'
+		where t.jiz_name like ?
+		 and  t.is_match =1
+	</zhanzhi_pp_zy>
+	
+	<statistic_exist1>
+		update YD_statistic t
+		set  t.zy_zhanzhi_exist =1
+		where t.zhanzhi in (
+							(select distinct(a.zhanzhi) from YD_STATISTIC a where a.zy_num=0 and a.zc_id='移动网')
+							 minus
+							(select distinct(b.zhanzhi_name) from zy_copy_test01 b where b.zy_id='移动网')
+							)
+	</statistic_exist1>
+	
+	<statistic_exist0>
+		update YD_statistic t
+		set t.zy_zhanzhi_exist=0
+		where t.zy_zhanzhi_exist is null
+		  and t.zy_num=0
+	</statistic_exist0>
+</configuration>
