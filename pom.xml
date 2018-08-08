@@ -17,6 +17,11 @@
         <module>mavenModule04</module>
         <module>springmvc2</module>
         <module>zczyppYD_Thread</module>
+        <module>zczypp_guangwang_Thread_0110</module>
+        <module>zczypp_guangwang_Thread</module>
+        <module>zczypp_checkout</module>
+        <module>zczyppYD_NoZhanzhi</module>
+        <module>zczypp_guangwang_Thread_OLT2</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->

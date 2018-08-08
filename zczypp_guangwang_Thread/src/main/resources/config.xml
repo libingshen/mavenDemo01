@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<srcdatabase>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@135.125.135.34:1621:odsmrac1</url>
+		<username>mss_ds</username>
+		<password><![CDATA[!odsm_dbu123]]></password>
+	</srcdatabase>
+	
+	<getLocationWhere>
+		select zhanzhi_name,ltext,anlhtxt,zc_zz_key,rownum rn from ZCZYPP_GWJDMC where zhuangtai = '1' 
+	</getLocationWhere>
+	
+	<getLocationWhere_zczypp>
+		select * from (
+			select zhanzhi_name,ltext,anlhtxt,zc_zz_key,rownum rn from ZCZYPP_GWJDMC where zhuangtai = '1' 
+		)where rn &gt;= ? and rn &lt;= ? 
+	</getLocationWhere_zczypp>
+
+	<!--
+		光网站址表
+	-->
+	<getLocationWhere_index>
+		select * from (
+			select zhanzhi_name,ltext,anlhtxt,zc_zz_key,rownum rn from ZCZYPP_GWJDMC where zhuangtai = '1' 
+		)where rn &gt;= ? and rn &lt;= ? 
+	</getLocationWhere_index>
+	
+	<getLocationWhere_count>
+		select count(*) c from ZCZYPP_GWJDMC where zhuangtai = '1' 
+	</getLocationWhere_count>
+	
+	<getZcWhere>
+		select index_level,zc_guize,zc_zz_key,zc_index,zc_id from ZC_GUIZE_GUANGWANG
+	</getZcWhere>
+	
+	<getZyWhere>
+		select index_level,zy_index,zy_guize,zy_id from Zy_GUIZE_GUANGWANG
+	</getZyWhere>
+	
+	<zhanzhi_pp_zy>
+		update zy_copy_test01 t
+		   set t.zhanzhi_name = ?,t.zy_id='光网OLT'
+         where t.to_dev_name like ?
+           and t.to_dev_spec like '%OLT%'
+           and t.is_match=1
+	</zhanzhi_pp_zy>
+	
+	<insertSqlPP>update zy_copy_test01 t set t.zy_pp = ? where t.id = ?</insertSqlPP>
+	
+	<!--获取资产表 某站址的所有索引类型-->
+	<getIndex>
+		select 
+			t.zc_index  
+		from 
+			zc_copy_test01 t 
+		where 
+			 t.zc_id = ?
+			 and t.zhanzhi_name = ?
+		group by t.zc_index
+	</getIndex>
+	
+	<!--获取资产表 某站址的一个资产索引-->
+	<getSqlZCOne>
+		select t.ANLN1
+  		from 
+  			zc_copy_test01 t
+ 		where 
+     		t.zc_index = ?
+     		and t.zhanzhi_name = ? 
+     		and zc_id = ?
+	</getSqlZCOne>
+	<!--获取资源表 某站址的一个资源索引-->
+	<getSqlZYOne>
+    	select t.id
+      		from zy_copy_test01 t
+   		 where 
+         	t.zy_index = ?
+         	and  t.zhanzhi_name =?
+         	and t.zy_id = ?
+	</getSqlZYOne>
+	
+	<!--光网-->
+	<!--secondTitle-->
+	<selectIndex1st>
+		select 
+			t.zc_index  
+		from 
+			zc_copy_test01 t 
+		where 
+			     t.zc_id = ?
+		     and t.zhanzhi_name = ?
+			 and t.zc_index_2nd is null	
+			 and t.aktiv >= '2008'
+		group by t.zc_index
+	</selectIndex1st>
+	
+	<selectIndex2nd>
+		select 
+			t.zc_index,t.zc_index_2nd  
+		from 
+			zc_copy_test01 t 
+		where 
+			 t.zc_id = ?
+			 and t.zhanzhi_name = ?
+			 and t.zc_index_2nd is not null	
+			 and t.aktiv >= '2008'	 
+		group by t.zc_index,t.zc_index_2nd  
+	</selectIndex2nd>
+	
+	<selectSqlZC2nd>
+		select t.ANLN1
+  		from 
+  			zc_copy_test01 t
+ 		where 
+     		t.zc_index = ?
+     		and t.zc_index_2nd = ?
+     		and t.zc_id = ?
+     		and t.zhanzhi_name = ? 
+     		and t.aktiv >= '2008'
+	</selectSqlZC2nd>
+	
+	<selectSqlZY2nd>
+    	select t.id
+      		from zy_copy_test01 t
+   		 where 
+         	t.zy_index = ?
+         	and t.zy_index_2nd = ?
+         	and t.zy_id = ?
+         	and t.zhanzhi_name = ?
+         	and t.is_match = 1
+	</selectSqlZY2nd>
+	
+	<selectSqlZC1st>
+		select t.ANLN1
+  		from 
+  			zc_copy_test01 t
+ 		where 
+     		t.zc_index = ?
+     		and t.zc_index_2nd is null
+     		and zc_id = ?
+     		and t.zhanzhi_name = ?
+     		and t.aktiv >= '2008'
+	</selectSqlZC1st>
+	
+	<selectSqlZY1st>
+    	select t.id
+      		from zy_copy_test01 t
+   		 where 
+         	t.zy_index = ?
+         	and t.zy_pp is null
+         	and t.zy_id = ?
+         	and t.zhanzhi_name = ?
+	</selectSqlZY1st>
+	
+
+</configuration>

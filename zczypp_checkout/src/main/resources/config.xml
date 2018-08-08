@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<srcdatabase>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@135.125.135.34:1621:odsmrac1</url>
+		<username>mss_ds</username>
+		<password><![CDATA[!odsm_dbu123]]></password>
+	</srcdatabase>
+	
+	
+</configuration>

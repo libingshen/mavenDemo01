@@ -95,6 +95,8 @@ public class GetLocation {
 					list.add(m);
 				}
 			}
+			System.out.println("移动网站址规则list============>"+list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{

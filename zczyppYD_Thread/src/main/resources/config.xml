@@ -6,18 +6,24 @@
 		<username>mss_ds</username>
 		<password><![CDATA[!odsm_dbu123]]></password>
 	</srcdatabase>
-	
+
+	<!--资产索引索引-->
 	<clearZcIndex>update zc_copy_test01 t set t.zc_index=null</clearZcIndex>
-	
+	<!--资源索引-->
 	<clearZyIndex>update zy_copy_test01 t set t.zy_index=null</clearZyIndex>
-	
+	<!---->
 	<clearZcZyPP>update zy_copy_test01 t set t.zy_pp=null</clearZcZyPP>
-	
-	<clearZcId>update zc_copy_test01 t set t.zc_id=null</clearZcId>
+	<!--资产id-->
+	<clearZcId>update zc_copy_test01 t set t.zc_id=null</clearZcId>9
+	<!--资源id-->
 	<clearZyId>update zy_copy_test01 t set t.zy_id=null</clearZyId>
+	<!--资产站址-->
 	<clearZcZhanzhi_name>update zc_copy_test01 t set t.zhanzhi_name=null</clearZcZhanzhi_name>
+	<!--资源站址-->
 	<clearZyZhanzhi_name>update zy_copy_test01 t set t.zhanzhi_name=null</clearZyZhanzhi_name>
+	<!---->
 	<clearZy_index_2nd>update zy_copy_test01 t set t.zy_index_2nd=null</clearZy_index_2nd>
+	<!---->
 	<clearYD_Statistic>truncate table YD_STATISTIC</clearYD_Statistic>
 	
 	<!--获取资产索引sql的where条件-->
@@ -60,7 +66,11 @@
 	</getSqlZYOne>
 	
 	<insertSqlPP>update zy_copy_test01 t set t.zy_pp = ? where t.id = ? and t.is_match=1</insertSqlPP>
-	
+
+	<!--
+		ZCZYPP_JZMC:资产资源匹配基站名称表
+			//移动网站址规则
+	-->
 	<getLocation>
 		select t.zhanzhi_name,t.zhanzhi_suoyin,t.city ,rownum rn from ZCZYPP_JZMC t
 	</getLocation>
@@ -70,11 +80,14 @@
 			select t.zhanzhi_name,t.zhanzhi_suoyin,t.city ,rownum rn from ZCZYPP_JZMC t
 		) where rn &gt;= ? and rn &lt;= ? 
 	</getLocation_index>
-	
+
+	<!--资产站址匹配-->
 	<zhanzhi_pp>
 		<!--
 			ltext:利润中心名称
 			anlhtxt:地址
+			aktiv：资产资本化日期
+			zz_key：资产目录
 
 		-->
 		update zc_copy_test01 t set t.zhanzhi_name = ?,t.zc_id='移动网' 

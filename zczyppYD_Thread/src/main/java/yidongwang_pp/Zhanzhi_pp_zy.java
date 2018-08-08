@@ -1,5 +1,8 @@
 package yidongwang_pp;
 
+import util.ConfigManager;
+import util.DbUtil;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,9 +10,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
-
-import util.ConfigManager;
-import util.DbUtil;
 /**
  * 资产资源第一步：为资源表打上基站
  * @author LJP
@@ -18,14 +18,14 @@ import util.DbUtil;
 public class Zhanzhi_pp_zy {
 	/**
 	 * 资源表  插入zhanzhi_name数据
-	 * @param args
+	 * @param
 	 */
 	public void do_zhanzhi_zypp() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
 		String logFileName = "资源打上站址";
-		String logPath = "F:"+File.separator+"YDlog"+File.separator+"移动网站址"+File.separator+logFileName+".txt";
+		String logPath = "C:"+File.separator+"YDlog"+File.separator+"移动网站址"+File.separator+logFileName+".txt";
 		PrintWriter logPrint;
 		try {
 			logPrint = new PrintWriter(new FileWriter(logPath, true), true);

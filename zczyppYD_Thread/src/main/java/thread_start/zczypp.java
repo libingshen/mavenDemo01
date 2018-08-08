@@ -2,44 +2,42 @@ package thread_start;
 
 import index.zc_index;
 import index.zy_index;
-
-import java.io.File;
-import java.util.concurrent.CountDownLatch;
-
 import pp_third_step.Step_3rd;
-
 import util.DbUtil;
 import util.DeleteDirectory;
 import yidongwang_pp.GetLocation;
 import yidongwang_pp.Zhanzhi_pp_zc;
 import yidongwang_pp.Zhanzhi_pp_zy;
 
+import java.io.File;
+import java.util.concurrent.CountDownLatch;
+
 public class zczypp {
 	
 	public void do_pp(){
 		//创建 文件夹 F:/YDlog
-		String logDirPath = "F:"+File.separator+"YDlog";
+		String logDirPath = "C:"+File.separator+"YDlog";
 		File logDir = new File(logDirPath);
     	if(logDir.exists()){
     		DeleteDirectory.deleteDir(logDir);
     	}
     	logDir.mkdirs();
 		//创建文件夹 F:/YDlog/移动网站址
-		String logZhanzhiStr = "F:"+File.separator+"YDlog"+File.separator+"移动网站址";
+		String logZhanzhiStr = "C:"+File.separator+"YDlog"+File.separator+"移动网站址";
 		File logZhanzhi = new File(logZhanzhiStr);
     	if(logZhanzhi.exists()){
     		DeleteDirectory.deleteDir(logZhanzhi);
     	}
     	logZhanzhi.mkdirs();
     	//创建文件夹 F:/YDlog/移动网索引
-		String logIndexStr = "F:"+File.separator+"YDlog"+File.separator+"移动网索引";
+		String logIndexStr = "C:"+File.separator+"YDlog"+File.separator+"移动网索引";
 		File logIndex = new File(logIndexStr);
     	if(logIndex.exists()){
     		DeleteDirectory.deleteDir(logIndex);
     	}
     	logIndex.mkdirs();
     	//创建文件夹 F:/YDlog/移动网匹配
-		String logPPStr = "F:"+File.separator+"YDlog"+File.separator+"移动网匹配";
+		String logPPStr = "C:"+File.separator+"YDlog"+File.separator+"移动网匹配";
 		File logPP = new File(logPPStr);
     	if(logPP.exists()){
     		DeleteDirectory.deleteDir(logPP);
@@ -51,14 +49,14 @@ public class zczypp {
 		 * 第一步：资产 打上站址标识
 		 * 		资源 打上站址标识
 		 */
-//    	System.out.println("第一步：给资产、资源打上站址标识");
-//    	long st_1 = System.currentTimeMillis();
-//		Zhanzhi_pp_zc zz_zc = new Zhanzhi_pp_zc();
-//		zz_zc.do_zhanzhi_zcpp();
-//		Zhanzhi_pp_zy zz_zy = new Zhanzhi_pp_zy();
-//		zz_zy.do_zhanzhi_zypp();
-//		long et_1= System.currentTimeMillis();
-//		System.out.println("第一步耗时： "+(et_1-st_1)/1000+" s");
+    	System.out.println("第一步：给资产、资源打上站址标识");
+    	long st_1 = System.currentTimeMillis();
+		Zhanzhi_pp_zc zz_zc = new Zhanzhi_pp_zc();
+		zz_zc.do_zhanzhi_zcpp();
+		Zhanzhi_pp_zy zz_zy = new Zhanzhi_pp_zy();
+		zz_zy.do_zhanzhi_zypp();
+		long et_1= System.currentTimeMillis();
+		System.out.println("第一步耗时： "+(et_1-st_1)/1000+" s");
 		/**
 		 * 第二步： 以站址为单位
 		 * 			为资产  打上  索引标识

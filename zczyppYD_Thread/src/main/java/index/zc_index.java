@@ -37,7 +37,7 @@ public class zc_index implements Runnable{
 	
 	public void run(){
 		String logFileName = count_begin+"至"+count_end+"个站址打资产索引";
-		String logPath = "F:"+File.separator+"YDlog"+File.separator+"移动网索引"+File.separator+logFileName+".txt";
+		String logPath = "C:"+File.separator+"YDlog"+File.separator+"移动网索引"+File.separator+logFileName+".txt";
 		PrintWriter logPrint;
 		try {
 			logPrint = new PrintWriter(new FileWriter(logPath, true), true);

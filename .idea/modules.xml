@@ -11,7 +11,12 @@
       <module fileurl="file://$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" filepath="$PROJECT_DIR$/mybatis_ssm/mybatis_ssm.iml" />
       <module fileurl="file://$PROJECT_DIR$/springmvc1/springmvc1.iml" filepath="$PROJECT_DIR$/springmvc1/springmvc1.iml" />
       <module fileurl="file://$PROJECT_DIR$/springmvc2/springmvc2.iml" filepath="$PROJECT_DIR$/springmvc2/springmvc2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczyppYD_NoZhanzhi/zczyppYD_NoZhanzhi.iml" filepath="$PROJECT_DIR$/zczyppYD_NoZhanzhi/zczyppYD_NoZhanzhi.iml" />
       <module fileurl="file://$PROJECT_DIR$/zczyppYD_Thread/zczyppYD_Thread.iml" filepath="$PROJECT_DIR$/zczyppYD_Thread/zczyppYD_Thread.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczypp_checkout/zczypp_checkout.iml" filepath="$PROJECT_DIR$/zczypp_checkout/zczypp_checkout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczypp_guangwang_Thread/zczypp_guangwang_Thread.iml" filepath="$PROJECT_DIR$/zczypp_guangwang_Thread/zczypp_guangwang_Thread.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczypp_guangwang_Thread_0110/zczypp_guangwang_Thread_0110.iml" filepath="$PROJECT_DIR$/zczypp_guangwang_Thread_0110/zczypp_guangwang_Thread_0110.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zczypp_guangwang_Thread_OLT2/zczypp_guangwang_Thread_OLT2.iml" filepath="$PROJECT_DIR$/zczypp_guangwang_Thread_OLT2/zczypp_guangwang_Thread_OLT2.iml" />
     </modules>
   </component>
 </project>

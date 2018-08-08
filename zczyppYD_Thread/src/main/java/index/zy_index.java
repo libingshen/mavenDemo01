@@ -1,25 +1,19 @@
 package index;
 
+import sqlUtil.ConnectSql;
+import util.DbUtil;
+import yidongwang_pp.GetLocation;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
-
-import org.dom4j.DocumentException;
-
-import sqlUtil.ConnectSql;
-import util.ConfigManager;
-import util.DbUtil;
-import yidongwang_pp.GetLocation;
 /**
  * 资产资源第二步：为资源打上索引
  * @author LJP
@@ -44,7 +38,7 @@ public class zy_index implements Runnable{
 	
 	public void run(){
 		String logFileName = count_begin+"至"+count_end+"个站址打资源索引";
-		String logPath = "F:"+File.separator+"YDlog"+File.separator+"移动网索引"+File.separator+logFileName+".txt";
+		String logPath = "C:"+File.separator+"YDlog"+File.separator+"移动网索引"+File.separator+logFileName+".txt";
 		PrintWriter logPrint;
 		try {
 			logPrint = new PrintWriter(new FileWriter(logPath, true), true);
@@ -59,10 +53,12 @@ public class zy_index implements Runnable{
 			stmt = conn.createStatement();
 			GetLocation gl = new GetLocation();
 			ConnectSql cs = new ConnectSql(conn);
+			//获得100站址
 			List<String> location = gl.getLocation_index(conn,count_begin,count_end);
 			long st=System.currentTimeMillis();
 			int count =1;
 			for(String s : location){
+
 				List<Map<String,String>> list = cs.zy_index(s);
 				logPrint.println("------------------------------开始为~~"+s+"~~站址打上索引；"+count);
 				long startTime = System.currentTimeMillis();

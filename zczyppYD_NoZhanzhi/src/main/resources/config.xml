@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<srcdatabase>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@135.125.135.34:1621:odsmrac1</url>
+		<username>mss_ds</username>
+		<password><![CDATA[!odsm_dbu123]]></password>
+	</srcdatabase>
+	
+	<zc_zhanzhi_all>
+		select distinct(t.ltext) from zc_copy_test01 t 
+		where  t.zz_key like '07%' 
+  		  and  t.aktiv &lt; '20160101'
+	</zc_zhanzhi_all>
+	
+	<zy_zhanzhi_all>
+		select distinct(t.area_name) from zy_copy_test01 t
+	</zy_zhanzhi_all>
+	
+	<zc_zhanzhi_update>
+		update zc_copy_test01 t set t.zhanzhi_name=? ,t.zc_id='移动网'
+		where t.ltext like ? and  t.zz_key like '07%' and  t.aktiv &lt; '20160101'		
+	</zc_zhanzhi_update>
+	
+	<zy_zhanzhi_update>
+		update zy_copy_test01 t set t.zhanzhi_name=? ,t.zy_id='移动网'
+		where t.area_name like ? and t.is_match = 1
+	</zy_zhanzhi_update>
+	
+	<!--获取资产索引sql的where条件-->
+	<getZcWhere>select t.zc_index,t.zc_guize,t.zc_zz_key from ZC_GUIZE t</getZcWhere>
+	<!--获取资源索引sql的where条件-->
+	<getZyWhere>select t.zy_index,t.zy_guize from ZY_GUIZE t</getZyWhere>
+	
+	<!--获取资产表 某站址的一个资产索引-->
+	<getSqlZCOne>
+		select t.ANLN1
+  		from 
+  			zc_copy_test01 t
+ 		where 
+     		t.zc_index = ?
+     		and t.zhanzhi_name = ? 
+     		and t.zc_id = '移动网'
+     		order by t.aktiv desc
+	</getSqlZCOne>
+	
+	<!--获取资源表 某站址的一个资源索引-->
+	<getSqlZYOne>
+    	select t.id
+      		from zy_copy_test01 t
+   		 where 
+         	t.zy_index = ?
+         	and  t.zhanzhi_name =?
+         	and t.zy_id = '移动网'
+	</getSqlZYOne>
+	
+	<!--获取资产表 某站址的所有索引类型-->
+	<getIndex>
+		select 
+			t.zc_index  
+		from 
+			zc_copy_test01 t 
+		where 
+			 t.zc_id = '移动网'
+			 and t.zhanzhi_name = ?
+		group by t.zc_index
+	</getIndex>
+	
+	<insertSqlStatistic>
+		insert into zczypp_statistic values(?,?,?,?,?)
+	</insertSqlStatistic>
+</configuration>

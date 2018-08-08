@@ -15,6 +15,11 @@
         <module name="mybatis_ssm" />
         <module name="springmvc1" />
         <module name="springmvc2" />
+        <module name="zczypp_checkout" />
+        <module name="zczypp_guangwang_Thread" />
+        <module name="zczypp_guangwang_Thread_0110" />
+        <module name="zczypp_guangwang_Thread_OLT2" />
+        <module name="zczyppYD_NoZhanzhi" />
         <module name="zczyppYD_Thread" />
       </profile>
     </annotationProcessing>
@@ -29,6 +34,11 @@
       <module name="springmvc1" target="1.7" />
       <module name="springmvc2" target="1.7" />
       <module name="WebUploader" target="1.7" />
+      <module name="zczypp_checkout" target="1.7" />
+      <module name="zczypp_guangwang_Thread" target="1.7" />
+      <module name="zczypp_guangwang_Thread_0110" target="1.7" />
+      <module name="zczypp_guangwang_Thread_OLT2" target="1.7" />
+      <module name="zczyppYD_NoZhanzhi" target="1.7" />
       <module name="zczyppYD_Thread" target="1.7" />
     </bytecodeTargetLevel>
   </component>

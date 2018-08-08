@@ -5,16 +5,18 @@ public class AllClear {
 	public static void main(String[] args) {
 		new Thread(){
 			public void run(){
+				//区分移动网光网
 				new ClearZcId().doClear();
 			}
 		}.start();
-		new Thread(){
+		/*new Thread(){
 			public void run(){
 				new ClearZcId().doClear();
 			}
-		}.start();
+		}.start();*/
 		new Thread(){
 			public void run(){
+				//
 				new ClearZcIndex().doClear();
 			}
 		}.start();

@@ -4,9 +4,26 @@ import java.util.concurrent.CountDownLatch;
 
 public class test {
 
-	
-	
-	
+	/**
+	 *
+	 * CountDownLatch:
+	 * http://mlxnle.iteye.com/blog/2367055
+	 *		一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。
+	 *		用给定的计数初始化 CountDownLatch。
+	 *		由于调用了countDown()方法，所以在当前计数到达零之前，await 方法会一直受阻塞。
+	 *		到达0之后，会释放所有等待的线程，await 的所有后续调用都将立即返回。
+	 * step.1
+	 * 创建CountDownLatch 实例预定计数次数:100
+	 *
+	 * step.2
+	 * 递减锁存器的计数，如果计数到达零，则释放所有等待的线程。
+	 * 如果当前计数大于零，则将计数减少 1
+	 *
+	 * step.3
+	 * 使当前线程在锁存器倒计数至零之前一直等待，除非线程被中断
+	 * 如果当前的计数为零，则此方法立即返回
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		CountDownLatch countDownLatch_1 = new CountDownLatch(100);
 		Runnable r1 = new MyRunnable_1(countDownLatch_1);
