@@ -1,10 +1,9 @@
 package util;
 
-import org.dom4j.DocumentException;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.dom4j.DocumentException;
 
 public class DbUtil {
 	public static Connection getConn() throws ClassNotFoundException, SQLException, DocumentException{

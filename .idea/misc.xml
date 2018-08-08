@@ -15,6 +15,7 @@
       <set>
         <option value="$PROJECT_DIR$/mavenDemo02/pom.xml" />
         <option value="$PROJECT_DIR$/mavenModule02/pom.xml" />
+        <option value="$PROJECT_DIR$/zczypp_checkout/pom.xml" />
       </set>
     </option>
   </component>
