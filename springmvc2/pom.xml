@@ -20,6 +20,14 @@
             <artifactId>springmvc-1</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+
+        <!--引入json类-->
+        <dependency>
+            <groupId>com.zbiti.maven</groupId>
+            <artifactId>mavenModule04</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

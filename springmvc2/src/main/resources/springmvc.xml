@@ -19,6 +19,19 @@
     <!--部署启动直接访问该页面-->
     <mvc:view-controller path="/index" view-name="index"></mvc:view-controller>
 
+    <!--
+		default-servlet-handler 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler,
+		它会对进入 DispatcherServlet 的请求进行筛查, 如果发现是没有经过映射的请求, 就将该请求交由 WEB 应用服务器默认的
+		Servlet 处理. 如果不是静态资源的请求，才由 DispatcherServlet 继续处理
+
+		一般 WEB 应用服务器默认的 Servlet 的名称都是 default.
+		若所使用的 WEB 服务器的默认 Servlet 名称不是 default，则需要通过 default-servlet-name 属性显式指定
+
+	-->
+    <!--可以达到加载本地静态资源的效果，不然无法加载本地的jQuery库文件-->
+    <mvc:default-servlet-handler/>
+
+
     <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
     <mvc:annotation-driven/>
 </beans>

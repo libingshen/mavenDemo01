@@ -10,7 +10,20 @@
 <head>
     <title>Title</title>
 </head>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <body>
 <h1>index....</h1>
+
+
+
+<script>
+    var log =function () {
+        console.log.apply(console,arguments)
+    }
+
+
+
+
+</script>
 </body>
 </html>

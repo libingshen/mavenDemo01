@@ -11,8 +11,13 @@
 <head>
     <title>Title</title>
 </head>
+<script src="scripts/jquery-3.3.1.js"></script>
 <body>
 
+<%--删除一个员工默认为get请求，将get请求转换为post请求--%>
+<form action="" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+</form>
 <c:if test="${empty requestScope.employees}">
     没有任何员工信息
 </c:if>
@@ -35,13 +40,44 @@
                 <td>${emp.gender==0?'Female':'Male'}</td>
                 <td>${emp.department.departmentName}</td>
                 <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
-
-
+                <td><a class="delete" href="/emp/${emp.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
+
+<br><br>
+<a href="emp">Add New Employee</a>
+
+<script>
+    var log = function () {
+        console.log.apply(console, arguments)
+    }
+
+    //删除员工
+    var deleteEvent = function () {
+        $(".delete").on("click", function () {
+            log("点击删除按钮。。。")
+            var href_value = $(this).attr("href")
+            log('==========>',href_value)
+            $("form").attr("action", href_value).submit()
+            return false
+        })
+    }
+    var bindEvents = function () {
+        deleteEvent()
+    }
+
+    var __main = function () {
+        bindEvents()
+    }
+
+
+    $(function () {
+        log("页面加载完成")
+        __main()
+    })
+</script>
 
 </body>
 </html>
